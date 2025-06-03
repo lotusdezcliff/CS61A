@@ -345,10 +345,12 @@ def time_per_word(words, times_per_player):
     # BEGIN PROBLEM 9
     "*** YOUR CODE HERE ***"
     time_per_word_list = []
-    for i in range(len(words)):
-        diffs = [times_per_player[i] - times_per_player[i - 1] for i in range(1, len(times_per_player))]
-        times_per_player.append(diffs)
-    return time_per_word_list
+    for i in range(len(times_per_player)):
+        diff = []
+        for j in range(1, (len(times_per_player[i]))):
+            diff.append(times_per_player[i][j] - times_per_player[i][j - 1])
+        times_per_player.append(diff)
+    return match(words, time_per_word_list)
     # END PROBLEM 9
 
 
