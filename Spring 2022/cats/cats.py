@@ -349,10 +349,10 @@ def time_per_word(words, times_per_player):
         diff = []
         for j in range(1, (len(times_per_player[i]))):
             diff.append(times_per_player[i][j] - times_per_player[i][j - 1])
-        times_per_player.append(diff)
+        time_per_word_list.append(diff)
     return match(words, time_per_word_list)
     # END PROBLEM 9
-
+#    101 test cases passed! No cases failed.
 
 def fastest_words(match):
     """Return a list of lists of which words each player typed fastest.
