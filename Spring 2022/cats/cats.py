@@ -373,7 +373,22 @@ def fastest_words(match):
     word_indices = range(len(match["words"]))    # contains an *index* for each word
     # BEGIN PROBLEM 10
     "*** YOUR CODE HERE ***"
+    # Create the result list
+    result_list = []
+    for i in player_indices:
+        result_list.append([])
+    # match["times'][i][j] -> [player_number][word_number]
+    # [0][0],[1][0],[2][0]... &&　[0][1],[1][1],[2][1]...
+    for i in word_indices:
+        fastest_player, fastest_value = None, float("inf")
+        for j in player_indices:
+            if match["times"][j][i] < fastest_value:
+                fastest_player, fastest_value = j, match["times"][j][i]
+        result_list[fastest_player].append(match["words"][i])
+    return result_list
+        
     # END PROBLEM 10
+    #    102 test cases passed! No cases failed.
 
 
 def match(words, times):
