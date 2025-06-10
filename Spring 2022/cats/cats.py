@@ -253,7 +253,7 @@ def minimum_mewtations(start, goal, limit):
     >>> minimum_mewtations("ckiteus", "kittens", big_limit) # ckiteus -> kiteus -> kitteus -> kittens
     3
     """
-
+    result = ""
     if start == goal:  # Fill in the condition
         # BEGIN
         "*** YOUR CODE HERE ***"
@@ -263,11 +263,20 @@ def minimum_mewtations(start, goal, limit):
     elif len(start) != len(goal):  # Feel free to remove or add additional cases
         # BEGIN
         "*** YOUR CODE HERE ***"
-
+        if start[0] != goal[0]:
+            if len(start) > len(goal):
+                start = start[1:]
+            elif len(start) == len(goal):
+                start[0] = goal[0]
+            else:
+                start = goal[0] + start[1:]
+        else:
+            result = result + start[0]
+            start, goal = start[1:], goal[1:]
         # END
 
     else:
-        add = ...  # Fill in these lines
+        add = minimum_mewtations(start)  # Fill in these lines
         remove = ...
         substitute = ...
         # BEGIN
