@@ -31,3 +31,23 @@ def count_k(n, k):
         return 0
     else:
         return sum(count_k(n - m, k) for m in range(1, k + 1))
+    
+# What would Python display?
+
+# >>> a = [1, 5, 4, [2, 3], 3]
+# >>> print(a[0], a[-1])
+# (1, 3)
+# >>> len(a)
+# 5
+# >>> 2 in a
+# False
+# >>> a[3][0]
+# 2
+
+def even_weighted(s):
+    """
+    >>> x = [1, 2, 3, 4, 5, 6]
+    >>> even_weighted(x)
+    [0, 6, 20]
+    """
+    return [s[x] * x for x in range(len(s)) if x % 2 == 0]
