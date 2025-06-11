@@ -253,36 +253,32 @@ def minimum_mewtations(start, goal, limit):
     >>> minimum_mewtations("ckiteus", "kittens", big_limit) # ckiteus -> kiteus -> kitteus -> kittens
     3
     """
-    result = ""
     if start == goal:  # Fill in the condition
         # BEGIN
         "*** YOUR CODE HERE ***"
         return 0
         # END
-
-    elif len(start) != len(goal):  # Feel free to remove or add additional cases
+    elif limit == 0:
+        return True
+    elif not start:  # Feel free to remove or add additional cases
         # BEGIN
         "*** YOUR CODE HERE ***"
-        if start[0] != goal[0]:
-            if len(start) > len(goal):
-                start = start[1:]
-            elif len(start) == len(goal):
-                start[0] = goal[0]
-            else:
-                start = goal[0] + start[1:]
-        else:
-            result = result + start[0]
-            start, goal = start[1:], goal[1:]
+        return len(goal)
+    elif not goal:
+        return len(start)
+    elif start[0] == goal[0]:
+            return minimum_mewtations(start[1:], goal[1:], limit)
         # END
 
     else:
-        add = minimum_mewtations(start)  # Fill in these lines
-        remove = ...
-        substitute = ...
+        add = 1 + minimum_mewtations(goal[0] + start, goal, limit - 1)  # Fill in these lines
+        remove = 1 + minimum_mewtations(start[1:], goal, limit - 1)
+        substitute = 1 + minimum_mewtations(goal[0] + start[1:], goal, limit - 1)
         # BEGIN
         "*** YOUR CODE HERE ***"
+        return min(add, remove, substitute)
         # END
-
+#    104 test cases passed! No cases failed.
 
 def final_diff(start, goal, limit):
     """A diff function that takes in a string START, a string GOAL, and a number LIMIT.
