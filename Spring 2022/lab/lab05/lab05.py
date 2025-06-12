@@ -18,6 +18,16 @@ def flatten(s):
     [[1, [1, 1]], 1, [1, 1]]
     """
     "*** YOUR CODE HERE ***"
+    # Base Case
+    if not s:
+        return s
+    # Check the type of each elements inside the list
+    else:
+        if type(s[0]) != list:
+            return [s[0]] + flatten(s[1:])
+        else:
+            return flatten(s[0]) + flatten(s[1:])
+#    1 test cases passed! No cases failed.            
 
 
 def couple(s, t):
