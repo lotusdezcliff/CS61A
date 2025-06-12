@@ -18,3 +18,8 @@ def replace_elements(source_list, dest_list):
     [5, 4, 3, 0, 0]
     """
     "*** YOUR CODE HERE ***"
+    # len(dest_list) >= len(source_list)
+    # Repalce the dest_list's elements to source_list's elements
+    for i in range(len(source_list)):
+        dest_list[i] = source_list[i]
+    return dest_list
