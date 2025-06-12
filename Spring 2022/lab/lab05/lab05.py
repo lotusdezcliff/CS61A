@@ -44,6 +44,8 @@ def couple(s, t):
     """
     assert len(s) == len(t)
     "*** YOUR CODE HERE ***"
+    return list([s[x]] + [t[x]] for x in range(len(s)))
+#     1 test cases passed! No cases failed.
 
 
 def insert_items(lst, entry, elem):
