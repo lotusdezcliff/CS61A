@@ -37,4 +37,39 @@ def my_reduce(combiner, seq):
             seq.pop(1)
         return seq[0]
 
+# Q2: WWPD: Mutability
+# What would Python display? In addition to giving the output, draw the box and pointer diagrams for each list to the right.
 
+# >>> s1 = [1, 2, 3]
+# >>> s2 = s1
+# >>> s1 is s2
+# Output: True
+
+# >>> s2.extend([5, 6])
+# >>> s1[4]
+# Output: 6
+
+# >>> s1.append([-1, 0, 1])
+# >>> s2[5]
+# Output: [-1, 0, 1]
+
+# >>> s3 = s2[:]
+# >>> s3.insert(3, s2.pop(3))
+# >>> len(s1)
+# Output: 6
+
+# >>> s1[4] is s3[6]
+# Output: False
+
+# >>> s3[s2[4][1]]
+# Output: 1
+
+# >>> s1[:3] is s2[:3]
+# Output: False
+
+# >>> s1[:3] == s2[:3]
+# Output: True
+
+# >>> s1[4].append(2)
+# >>> s3[6][3]
+# Output: Error
