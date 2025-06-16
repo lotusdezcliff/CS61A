@@ -73,3 +73,122 @@ def my_reduce(combiner, seq):
 # >>> s1[4].append(2)
 # >>> s3[6][3]
 # Output: Error
+
+# Q3: WWPD: Student OOP
+# Below we have defined the classes Professor and Student, implementing some of what was described above. Remember that Python passes the self argument implicitly to methods when calling the method directly on an object.
+class Student:
+
+    max_slip_days = 3 # this is a class variable
+
+    def __init__(self, name, staff):
+        self.name = name # this is an instance variable
+        self.understanding = 0
+        staff.add_student(self)
+        print("Added", self.name)
+
+    def visit_office_hours(self, staff):
+        staff.assist(self)
+        print("Thanks, " + staff.name)
+
+class Professor:
+
+    def __init__(self, name):
+        self.name = name
+        self.students = {}
+
+    def add_student(self, student):
+        self.students[student.name] = student
+
+    def assist(self, student):
+        student.understanding += 1
+
+    def grant_more_slip_days(self, student, days):
+        student.max_slip_days = days
+
+# What will the following lines output?
+# >>> callahan = Professor("Callahan")
+# >>> elle = Student("Elle", callahan)
+# Output: Added Elle
+
+# >>> elle.visit_office_hours(callahan)
+# Output: Thanks, Callahan
+
+# >>> elle.visit_office_hours(Professor("Paulette"))
+# Output: Thanks, Paulette
+
+# >>> elle.understanding
+# Output: 1
+
+# >>> [name for name in callahan.students]
+# Output: [Elle]
+
+# >>> x = Student("Vivian", Professor("Stromwell")).name
+# Output: Added, Vivian
+
+# >>> x
+# Output: Vivian
+
+# >>> [name for name in callahan.students]
+# Output: [Elle]
+
+# >>> elle.max_slip_days
+# Output: 3
+
+# >>> callahan.grant_more_slip_days(elle, 7)
+# >>> elle.max_slip_days
+# Output: 7
+
+# >>> Student.max_slip_days
+# Output: 3
+
+
+# Q4: Keyboard
+class Button:
+    def __init__(self, pos, key):
+        self.pos = pos
+        self.key = key
+        self.times_pressed = 0
+
+class Keyboard:
+    """A Keyboard takes in an arbitrary amount of buttons, and has a
+    dictionary of positions as keys, and values as Buttons.
+    >>> b1 = Button(0, "H")
+    >>> b2 = Button(1, "I")
+    >>> k = Keyboard(b1, b2)
+    >>> k.buttons[0].key
+    'H'
+    >>> k.press(1)
+    'I'
+    >>> k.press(2) # No button at this position
+    ''
+    >>> k.typing([0, 1])
+    'HI'
+    >>> k.typing([1, 0])
+    'IH'
+    >>> b1.times_pressed
+    2
+    >>> b2.times_pressed
+    3
+    """
+    def __init__(self, *args):
+        ________________
+        for _________ in ________________:
+            ________________
+
+    def press(self, info):
+        """Takes in a position of the button pressed, and
+        returns that button's output."""
+        if ____________________:
+            ________________
+            ________________
+            ________________
+        ________________
+
+    def typing(self, typing_input):
+        """Takes in a list of positions of buttons pressed, and
+        returns the total output."""
+        ________________
+        for ________ in ____________________:
+            ________________
+        ________________
+
