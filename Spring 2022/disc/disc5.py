@@ -171,10 +171,7 @@ class Keyboard:
     3
     """
     def __init__(self, *args):
-        ________________
-        for _________ in ________________:
-            ________________
-
+        
     def press(self, info):
         """Takes in a position of the button pressed, and
         returns that button's output."""
