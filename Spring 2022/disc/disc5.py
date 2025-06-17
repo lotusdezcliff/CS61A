@@ -172,7 +172,6 @@ class Keyboard:
     """
     def __init__(self, *args):
         self.buttons = {}
-        i = 0
         for button in args:
             self.buttons[button.pos] = button
 
@@ -180,16 +179,15 @@ class Keyboard:
         """Takes in a position of the button pressed, and
         returns that button's output."""
         if info in self.buttons:
-            self.buttons[info] = self.press
-            self.times_pressed += 1
-            return self.buttons[info]
-        return ""
+            self.buttons[info].times_pressed += 1
+            return self.buttons[info].key
+        else:
+            return ""
 
     def typing(self, typing_input):
         """Takes in a list of positions of buttons pressed, and
         returns the total output."""
-        ________________
-        for ________ in ____________________:
-            ________________
-        ________________
-
+        word = ''
+        for position in typing_input:
+            word += self.buttons[position].key 
+        return word
