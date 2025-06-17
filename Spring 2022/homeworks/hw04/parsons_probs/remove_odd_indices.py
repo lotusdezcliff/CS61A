@@ -13,3 +13,7 @@ def remove_odd_indices(lst, odd):
     [6, 8]
     """
     "*** YOUR CODE HERE ***"
+    if odd:
+        return lst[::2]
+    else:
+        return lst[1::2]
