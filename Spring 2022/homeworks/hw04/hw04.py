@@ -11,7 +11,8 @@ def merge(lst1, lst2):
     [2, 4, 5, 6, 7]
     """
     "*** YOUR CODE HERE ***"
-
+    return sorted(lst1 + lst2)
+#    1 test cases passed! No cases failed.
 
 class Mint:
     """A mint creates coins by stamping on years.
