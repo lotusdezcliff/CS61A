@@ -16,6 +16,15 @@ class SmartFridge:
 
     def add_item(self, item, quantity):
         "*** YOUR CODE HERE ***"
+        if item not in self.items:
+            self.items[item] = 0
+        self.items[item] += quantity
+        return f'I now have {self.items[item]} {item}'
 
     def use_item(self, item, quantity):
         "*** YOUR CODE HERE ***"
+        if self.items[item] - quantity >= 0:
+            self.items[item] -= quantity
+            return f'I have {self.items[item]} {item} left'
+        else:
+            return f'Uh oh, buy more {item}!'
