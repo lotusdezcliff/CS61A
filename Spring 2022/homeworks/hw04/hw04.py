@@ -113,3 +113,35 @@ class VendingMachine:
     'Here is your soda.'
     """
     "*** YOUR CODE HERE ***"
+    # methods: add_funds, restock, vend
+    def __init__(self, item, price):
+        self.item = item
+        self.price = price
+        self.balance = 0
+        self.stock = 0
+    
+    def add_funds(self, money):
+        if self.stock == 0:
+            return f'Nothing left to vend. Please restock. Here is your ${money}.'
+        self.balance += money
+        return f'Current balance: ${self.balance}'
+    
+    def restock(self, quantity):
+        self.stock += quantity
+        return f'Current {self.item} stock: {self.stock}'
+
+    def vend(self):
+        if self.stock > 0 and self.balance == self.price:
+            self.stock -= 1
+            self.balance -= self.price
+            return f'Here is your {self.item}.'
+        elif self.stock > 0 and self.balance > self.price:
+            self.stock -= 1
+            change = self.balance - self.price
+            self.balance = 0
+            return f'Here is your {self.item} and ${change} change.'
+        elif self.stock > 0 and self.balance < self.price:
+            return f'You must add ${self.price - self.balance} more funds.'
+        else:
+            return 'Nothing left to vend. Please restock.'
+        #    1 test cases passed! No cases failed.
