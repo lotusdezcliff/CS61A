@@ -1,3 +1,5 @@
+from itertools import product
+
 def repeated(t, k):
     """Return the first value in iterator T that appears K times in a row.
     Iterate through the items such that if the same iterator is passed into
@@ -52,7 +54,7 @@ def deep_len(lnk):
     3
     >>> deep_len(Link(Link(1, Link(2)), Link(3, Link(4))))
     4
-    >>> levels = Link(Link(Link(1, Link(2)), \
+    >>> levels = Link(Link(Link(1, Link(2)), 
             Link(3)), Link(Link(4), Link(5)))
     >>> print(levels)
     <<<1 2> 3> <4> 5>
@@ -150,11 +152,11 @@ def subseqs(s):
     >>> subseqs([])
     [[]]
     """
-    if ________________:
-        ________________
+    if not s:
+        return [[]]
     else:
-        ________________
-        ________________
+        return list(map(lambda x: list(x), set(map(lambda x: tuple(sorted(set(x))), product(s, repeat=len(s)))))) + [[]]
+
 
 
 def non_decrease_subseqs(s):
