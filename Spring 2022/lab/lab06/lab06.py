@@ -1,3 +1,4 @@
+from math import log, ceil
 class Cat:
     def __init__(self, name, owner, lives=9):
         self.is_alive = True
@@ -80,7 +81,8 @@ class Account:
         """Return the number of years until balance would grow to amount."""
         assert self.balance > 0 and amount > 0 and self.interest > 0
         "*** YOUR CODE HERE ***"
-
+        return ceil(log(amount / self.balance, self.interest + 1))
+#    1 test cases passed! No cases failed.
 
 class FreeChecking(Account):
     """A bank account that charges for withdrawals, but the first two are free!
