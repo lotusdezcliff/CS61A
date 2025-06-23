@@ -117,13 +117,14 @@ class FreeChecking(Account):
     
     def withdraw(self, amount):
         self.account_checktimes += 1
-        adjusted_amount = super().withdraw(amount) + FreeChecking.withdraw_fee
-        if self.account_checktimes >= FreeChecking.free_withdrawals and self.balance - adjusted_amount >= 0:
-            return self.balance - amount - FreeChecking.withdraw_fee
-        elif self.account_checktimes >= FreeChecking.free_withdrawals and self.balance - adjusted_amount < 0:
-            return 'Insufficient funds'
-        elif self.account_checktimes < FreeChecking.free_withdrawals and self.balance - amount >= 0:
-            return self.balance - amount
-        elif self.account_checktimes < FreeChecking.free_withdrawals and self.balance - amount < 0:
-            return 'Insufficient funds'
-
+        if self.account_checktimes > FreeChecking.free_withdrawals:
+            if self.balance - amount - FreeChecking.withdraw_fee >= 0:
+                return super().withdraw(amount + FreeChecking.withdraw_fee)
+            else:
+                return 'Insufficient funds'
+        else:
+            if self.balance - amount >= 0:
+                return super().withdraw(amount)
+            else:
+                return 'Insufficient funds'
+#     1 test cases passed! No cases failed.
