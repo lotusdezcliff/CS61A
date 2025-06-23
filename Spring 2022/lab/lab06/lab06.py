@@ -36,8 +36,8 @@ class Cat:
         """
         cat_names = ["Felix", "Bugs", "Grumpy"]
         "*** YOUR CODE HERE ***"
-        return cls(____, ____, ____)
-
+        return cls(cat_names[len(owner) % len(cat_names)], owner, len(owner) + len(cat_names[len(owner) % len(cat_names)]))
+#     1 test cases passed! No cases failed.
 
 class Account:
     """An account has a balance and a holder.
