@@ -158,7 +158,7 @@ class HarvesterAnt(Ant):
     name = 'Harvester'
     implemented = True
     # OVERRIDE CLASS ATTRIBUTES HERE
-
+    food_cost = 2
     def action(self, gamestate):
         """Produce 1 additional food for the colony.
 
@@ -166,6 +166,8 @@ class HarvesterAnt(Ant):
         """
         # BEGIN Problem 1
         "*** YOUR CODE HERE ***"
+        super().action(gamestate)
+        gamestate.food += 1
         # END Problem 1
 
 
@@ -176,6 +178,7 @@ class ThrowerAnt(Ant):
     implemented = True
     damage = 1
     # ADD/OVERRIDE CLASS ATTRIBUTES HERE
+    food_cost = 3
 
     def nearest_bee(self):
         """Return the nearest Bee in a Place that is not the HIVE, connected to
