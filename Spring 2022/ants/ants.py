@@ -27,9 +27,10 @@ class Place:
         # Phase 1: Add an entrance to the exit
         # BEGIN Problem 2
         "*** YOUR CODE HERE ***"
-        
+        if self.exit != None:
+            self.exit.entrance = self
         # END Problem 2
-
+#    5 test cases passed! No cases failed.
     def add_insect(self, insect):
         """
         Asks the insect to add itself to the current place. This method exists so
@@ -160,7 +161,7 @@ class HarvesterAnt(Ant):
     implemented = True
     # OVERRIDE CLASS ATTRIBUTES HERE
     food_cost = 2
-    
+
     def action(self, gamestate):
         """Produce 1 additional food for the colony.
 
