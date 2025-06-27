@@ -27,6 +27,7 @@ class Place:
         # Phase 1: Add an entrance to the exit
         # BEGIN Problem 2
         "*** YOUR CODE HERE ***"
+        
         # END Problem 2
 
     def add_insect(self, insect):
@@ -159,6 +160,7 @@ class HarvesterAnt(Ant):
     implemented = True
     # OVERRIDE CLASS ATTRIBUTES HERE
     food_cost = 2
+    
     def action(self, gamestate):
         """Produce 1 additional food for the colony.
 
@@ -169,7 +171,7 @@ class HarvesterAnt(Ant):
         super().action(gamestate)
         gamestate.food += 1
         # END Problem 1
-
+#     5 test cases passed! No cases failed.
 
 class ThrowerAnt(Ant):
     """ThrowerAnt throws a leaf each turn at the nearest Bee in its range."""
