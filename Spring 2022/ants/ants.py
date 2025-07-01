@@ -301,7 +301,27 @@ class WallAnt(Ant):
 #    8 test cases passed! No cases failed.
 # BEGIN Problem 7
 # The HungryAnt Class
+class HungryAnt(Ant):
+    name = 'Hungry'
+    food_cost = 4
+    implemented = True
+    time_to_chew = 3
+
+    def __init__(self, health=1):
+        super().__init__(health)
+        self.chew_timer = 0
+
+    def action(self, gamestate):
+        if self.chew_timer > 0:
+            self.chew_timer -= 1
+        else:
+            bee = random.choice(self.place.bees) if self.place.bees else None
+            if bee is not None:
+                bee.reduce_health(bee.health)
+                self.chew_timer = HungryAnt.time_to_chew
+
 # END Problem 7
+#    14 test cases passed! No cases failed.
 
 
 class ContainerAnt(Ant):
