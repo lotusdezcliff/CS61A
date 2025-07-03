@@ -132,6 +132,11 @@ class Ant(Insect):
     def add_to(self, place):
         if place.ant is None:
             place.ant = self
+        elif place.ant.can_contain(self):
+            place.ant.store_ant(self)
+        elif self.can_contain(place.ant):
+            self.store_ant(place.ant)
+            place.ant = self
         else:
             # BEGIN Problem 8
             assert place.ant is None, 'Two ants in {0}'.format(place)
@@ -337,11 +342,14 @@ class ContainerAnt(Ant):
     def can_contain(self, other):
         # BEGIN Problem 8
         "*** YOUR CODE HERE ***"
+        return (not other.is_container) and (self.ant_contained is None)
         # END Problem 8
 
     def store_ant(self, ant):
         # BEGIN Problem 8
         "*** YOUR CODE HERE ***"
+        if self.can_contain(ant):
+            self.ant_contained = ant
         # END Problem 8
 
     def remove_ant(self, ant):
@@ -362,8 +370,11 @@ class ContainerAnt(Ant):
     def action(self, gamestate):
         # BEGIN Problem 8
         "*** YOUR CODE HERE ***"
+        if self.ant_contained:
+            self.ant_contained.action(gamestate)
+            
         # END Problem 8
-
+#    20 test cases passed! No cases failed.
 
 class BodyguardAnt(ContainerAnt):
     """BodyguardAnt provides protection to other Ants."""
@@ -372,7 +383,10 @@ class BodyguardAnt(ContainerAnt):
     food_cost = 4
     # OVERRIDE CLASS ATTRIBUTES HERE
     # BEGIN Problem 8
-    implemented = False   # Change to True to view in the GUI
+    implemented = True   # Change to True to view in the GUI
+
+    def __init__(self, health=2):
+        super().__init__(health)
     # END Problem 8
 
 # BEGIN Problem 9
