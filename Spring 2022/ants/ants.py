@@ -422,6 +422,9 @@ class Water(Place):
         its health to 0."""
         # BEGIN Problem 10
         "*** YOUR CODE HERE ***"
+        super().add_insect(self, insect)
+        if not insect.is_waterproof:
+            insect.health = 0
         # END Problem 10
 
 # BEGIN Problem 11
