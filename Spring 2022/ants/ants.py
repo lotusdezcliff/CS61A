@@ -59,6 +59,7 @@ class Insect:
         """Create an Insect with a health amount and a starting PLACE."""
         self.health = health
         self.place = place  # set by Place.add_insect and Place.remove_insect
+        self.is_waterproof = False
 
     def reduce_health(self, amount):
         """Reduce health by AMOUNT, and remove the insect from its place if it
@@ -422,11 +423,11 @@ class Water(Place):
         its health to 0."""
         # BEGIN Problem 10
         "*** YOUR CODE HERE ***"
-        super().add_insect(self, insect)
+        super().add_insect(insect)
         if not insect.is_waterproof:
-            insect.health = 0
+            insect.reduce_health(insect.health)
         # END Problem 10
-
+#    8 test cases passed! No cases failed.
 # BEGIN Problem 11
 # The ScubaThrower class
 # END Problem 11
@@ -487,7 +488,11 @@ class Bee(Insect):
 
     name = 'Bee'
     damage = 1
+
     # OVERRIDE CLASS ATTRIBUTES HERE
+    def __init__(self, health, place=None):
+        super().__init__(health, place)
+        self.is_waterproof = True
 
     def sting(self, ant):
         """Attack an ANT, reducing its health by 1."""
