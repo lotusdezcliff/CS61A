@@ -391,8 +391,28 @@ class BodyguardAnt(ContainerAnt):
 
 # BEGIN Problem 9
 # The TankAnt class
-# END Problem 9
+class TankAnt(ContainerAnt):
+    """BodyguardAnt provides protection to other Ants."""
 
+    name = 'Tank'
+    food_cost = 6
+    damage = 1
+    # OVERRIDE CLASS ATTRIBUTES HERE
+    # BEGIN Problem 8
+    implemented = True   # Change to True to view in the GUI
+
+    def __init__(self, health=2):
+        super().__init__(health)
+
+    def action(self, gamestate):
+        place = self.place
+        bees = place.bees[:]
+        for bee in bees:
+            bee.reduce_health(self.damage)
+        if self.ant_contained:
+            self.ant_contained.action(gamestate)
+# END Problem 9
+#     13 test cases passed! No cases failed.
 
 class Water(Place):
     """Water is a place that can only hold waterproof insects."""
