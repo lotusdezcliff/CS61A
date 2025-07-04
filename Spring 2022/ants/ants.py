@@ -452,8 +452,11 @@ class QueenAnt(Ant):  # You should change this line
     food_cost = 7
     # OVERRIDE CLASS ATTRIBUTES HERE
     # BEGIN Problem 12
-    implemented = False   # Change to True to view in the GUI
+    implemented = True   # Change to True to view in the GUI
     # END Problem 12
+    def __init__(self, health=1):
+        super().__init__(health)
+        self.doubled = set()
 
     @classmethod
     def construct(cls, gamestate):
@@ -463,6 +466,12 @@ class QueenAnt(Ant):  # You should change this line
         """
         # BEGIN Problem 12
         "*** YOUR CODE HERE ***"
+        if gamestate.queen_exists:
+            return None
+        else:
+            gamestate.queen_exists = True
+            return super().construct(gamestate)
+
         # END Problem 12
 
     def action(self, gamestate):
@@ -471,6 +480,19 @@ class QueenAnt(Ant):  # You should change this line
         """
         # BEGIN Problem 12
         "*** YOUR CODE HERE ***"
+        super().action(gamestate)
+        exit = self.place.exit
+        while exit != None:
+            ant = exit.ant
+            if exit.ant is not None and exit.ant.is_container is False:
+                if ant not in self.doubled:
+                    ant.damage *= 2
+                    self.doubled.add(ant)
+            if exit.ant is not None and exit.ant.is_container is True: 
+                if exit.ant.ant_contained is not None and ant not in self.doubled:
+                    ant.ant_contained.damage *= 2
+                    self.doubled.add(ant.ant_contained)
+            exit = exit.exit
         # END Problem 12
 
     def reduce_health(self, amount):
@@ -479,6 +501,10 @@ class QueenAnt(Ant):  # You should change this line
         """
         # BEGIN Problem 12
         "*** YOUR CODE HERE ***"
+        super().reduce_health(amount)
+        if self.health <= 0:
+            ants_lose()
+
         # END Problem 12
 
 
