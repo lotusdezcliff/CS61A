@@ -430,6 +430,14 @@ class Water(Place):
 #    8 test cases passed! No cases failed.
 # BEGIN Problem 11
 # The ScubaThrower class
+class ScubaThrower(ThrowerAnt):
+    
+    name = 'Scuba'
+    implemented = True
+    food_cost = 6
+    
+    def __int__(self):
+        self.is_waterproof = True
 # END Problem 11
 
 # BEGIN Problem 12
