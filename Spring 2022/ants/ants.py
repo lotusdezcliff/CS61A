@@ -436,10 +436,11 @@ class ScubaThrower(ThrowerAnt):
     implemented = True
     food_cost = 6
     
-    def __int__(self):
+    def __init__(self, health=1):
         self.is_waterproof = True
+        self.health = health
 # END Problem 11
-
+#    9 test cases passed! No cases failed.
 # BEGIN Problem 12
 
 
