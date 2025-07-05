@@ -43,7 +43,9 @@ class Place:
         Asks the insect to remove itself from the current place. This method exists so
             it can be enhanced in subclasses.
         """
-        insect.remove_from(self)
+        if not isinstance(insect, QueenAnt):
+            insect.remove_from(self)
+
 
     def __str__(self):
         return self.name
@@ -444,7 +446,7 @@ class ScubaThrower(ThrowerAnt):
 # BEGIN Problem 12
 
 
-class QueenAnt(Ant):  # You should change this line
+class QueenAnt(ScubaThrower):  # You should change this line
 # END Problem 12
     """The Queen of the colony. The game is over if a bee enters her place."""
 
@@ -466,12 +468,15 @@ class QueenAnt(Ant):  # You should change this line
         """
         # BEGIN Problem 12
         "*** YOUR CODE HERE ***"
-        if gamestate.queen_exists:
-            return None
+        if hasattr(gamestate, 'queen_existed'):
+            if gamestate.queen_existed:
+                return None
+            else:
+                gamestate.queen_existed = True
+                return super(QueenAnt, cls).construct(gamestate)
         else:
-            gamestate.queen_exists = True
-            return super().construct(gamestate)
-
+            gamestate.queen_existed = True
+            return super(QueenAnt, cls).construct(gamestate)
         # END Problem 12
 
     def action(self, gamestate):
@@ -484,17 +489,20 @@ class QueenAnt(Ant):  # You should change this line
         exit = self.place.exit
         while exit != None:
             ant = exit.ant
-            if exit.ant is not None and exit.ant.is_container is False:
-                if ant not in self.doubled:
+            if ant is not None:
+                if ant.is_container is False and ant not in self.doubled:
                     ant.damage *= 2
                     self.doubled.add(ant)
-            if exit.ant is not None and exit.ant.is_container is True: 
-                if exit.ant.ant_contained is not None and ant not in self.doubled:
-                    ant.ant_contained.damage *= 2
-                    self.doubled.add(ant.ant_contained)
+                elif ant.is_container is True:
+                    if ant not in self.doubled:
+                        ant.damage *= 2
+                        self.doubled.add(ant)
+                    if ant.ant_contained is not None and ant.ant_contained not in self.doubled:
+                        ant.ant_contained.damage *= 2
+                        self.doubled.add(ant.ant_contained)
             exit = exit.exit
         # END Problem 12
-
+#    16 test cases passed! No cases failed.
     def reduce_health(self, amount):
         """Reduce health by AMOUNT, and if the QueenAnt has no health
         remaining, signal the end of the game.
