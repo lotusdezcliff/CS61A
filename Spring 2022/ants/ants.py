@@ -337,6 +337,7 @@ class ContainerAnt(Ant):
     def can_contain(self, other):
         # BEGIN Problem 8
         "*** YOUR CODE HERE ***"
+        if 
         # END Problem 8
 
     def store_ant(self, ant):
@@ -372,7 +373,7 @@ class BodyguardAnt(ContainerAnt):
     food_cost = 4
     # OVERRIDE CLASS ATTRIBUTES HERE
     # BEGIN Problem 8
-    implemented = False   # Change to True to view in the GUI
+    implemented = True   # Change to True to view in the GUI
     # END Problem 8
 
 # BEGIN Problem 9
