@@ -43,7 +43,9 @@ class Place:
         Asks the insect to remove itself from the current place. This method exists so
             it can be enhanced in subclasses.
         """
-        insect.remove_from(self)
+        if not isinstance(insect, QueenAnt):
+            insect.remove_from(self)
+
 
     def __str__(self):
         return self.name
@@ -59,6 +61,7 @@ class Insect:
         """Create an Insect with a health amount and a starting PLACE."""
         self.health = health
         self.place = place  # set by Place.add_insect and Place.remove_insect
+        self.is_waterproof = False
 
     def reduce_health(self, amount):
         """Reduce health by AMOUNT, and remove the insect from its place if it
@@ -106,6 +109,7 @@ class Ant(Insect):
     implemented = False  # Only implemented Ant classes should be instantiated
     food_cost = 0
     is_container = False
+    blocks_path = True
     # ADD CLASS ATTRIBUTES HERE
 
     def __init__(self, health=1):
@@ -132,6 +136,11 @@ class Ant(Insect):
     def add_to(self, place):
         if place.ant is None:
             place.ant = self
+        elif place.ant.can_contain(self):
+            place.ant.store_ant(self)
+        elif self.can_contain(place.ant):
+            self.store_ant(place.ant)
+            place.ant = self
         else:
             # BEGIN Problem 8
             assert place.ant is None, 'Two ants in {0}'.format(place)
@@ -152,6 +161,7 @@ class Ant(Insect):
         # BEGIN Problem 12
         "*** YOUR CODE HERE ***"
         # END Problem 12
+    
 
 
 class HarvesterAnt(Ant):
@@ -337,12 +347,18 @@ class ContainerAnt(Ant):
     def can_contain(self, other):
         # BEGIN Problem 8
         "*** YOUR CODE HERE ***"
+<<<<<<< HEAD
         if 
+=======
+        return (not other.is_container) and (self.ant_contained is None)
+>>>>>>> 9552e4b2aef118251efcd1c9d686d619477fcce8
         # END Problem 8
 
     def store_ant(self, ant):
         # BEGIN Problem 8
         "*** YOUR CODE HERE ***"
+        if self.can_contain(ant):
+            self.ant_contained = ant
         # END Problem 8
 
     def remove_ant(self, ant):
@@ -363,8 +379,11 @@ class ContainerAnt(Ant):
     def action(self, gamestate):
         # BEGIN Problem 8
         "*** YOUR CODE HERE ***"
+        if self.ant_contained:
+            self.ant_contained.action(gamestate)
+            
         # END Problem 8
-
+#    20 test cases passed! No cases failed.
 
 class BodyguardAnt(ContainerAnt):
     """BodyguardAnt provides protection to other Ants."""
@@ -374,12 +393,38 @@ class BodyguardAnt(ContainerAnt):
     # OVERRIDE CLASS ATTRIBUTES HERE
     # BEGIN Problem 8
     implemented = True   # Change to True to view in the GUI
+<<<<<<< HEAD
+=======
+
+    def __init__(self, health=2):
+        super().__init__(health)
+>>>>>>> 9552e4b2aef118251efcd1c9d686d619477fcce8
     # END Problem 8
 
 # BEGIN Problem 9
 # The TankAnt class
-# END Problem 9
+class TankAnt(ContainerAnt):
+    """BodyguardAnt provides protection to other Ants."""
 
+    name = 'Tank'
+    food_cost = 6
+    damage = 1
+    # OVERRIDE CLASS ATTRIBUTES HERE
+    # BEGIN Problem 8
+    implemented = True   # Change to True to view in the GUI
+
+    def __init__(self, health=2):
+        super().__init__(health)
+
+    def action(self, gamestate):
+        place = self.place
+        bees = place.bees[:]
+        for bee in bees:
+            bee.reduce_health(self.damage)
+        if self.ant_contained:
+            self.ant_contained.action(gamestate)
+# END Problem 9
+#     13 test cases passed! No cases failed.
 
 class Water(Place):
     """Water is a place that can only hold waterproof insects."""
@@ -389,16 +434,28 @@ class Water(Place):
         its health to 0."""
         # BEGIN Problem 10
         "*** YOUR CODE HERE ***"
+        super().add_insect(insect)
+        if not insect.is_waterproof:
+            insect.reduce_health(insect.health)
         # END Problem 10
-
+#    8 test cases passed! No cases failed.
 # BEGIN Problem 11
 # The ScubaThrower class
+class ScubaThrower(ThrowerAnt):
+    
+    name = 'Scuba'
+    implemented = True
+    food_cost = 6
+    
+    def __init__(self, health=1):
+        self.is_waterproof = True
+        self.health = health
 # END Problem 11
-
+#    9 test cases passed! No cases failed.
 # BEGIN Problem 12
 
 
-class QueenAnt(Ant):  # You should change this line
+class QueenAnt(ScubaThrower):  # You should change this line
 # END Problem 12
     """The Queen of the colony. The game is over if a bee enters her place."""
 
@@ -406,8 +463,11 @@ class QueenAnt(Ant):  # You should change this line
     food_cost = 7
     # OVERRIDE CLASS ATTRIBUTES HERE
     # BEGIN Problem 12
-    implemented = False   # Change to True to view in the GUI
+    implemented = True   # Change to True to view in the GUI
     # END Problem 12
+    def __init__(self, health=1):
+        super().__init__(health)
+        self.doubled = set()
 
     @classmethod
     def construct(cls, gamestate):
@@ -417,6 +477,15 @@ class QueenAnt(Ant):  # You should change this line
         """
         # BEGIN Problem 12
         "*** YOUR CODE HERE ***"
+        if hasattr(gamestate, 'queen_existed'):
+            if gamestate.queen_existed:
+                return None
+            else:
+                gamestate.queen_existed = True
+                return super(QueenAnt, cls).construct(gamestate)
+        else:
+            gamestate.queen_existed = True
+            return super(QueenAnt, cls).construct(gamestate)
         # END Problem 12
 
     def action(self, gamestate):
@@ -425,14 +494,34 @@ class QueenAnt(Ant):  # You should change this line
         """
         # BEGIN Problem 12
         "*** YOUR CODE HERE ***"
+        super().action(gamestate)
+        exit = self.place.exit
+        while exit != None:
+            ant = exit.ant
+            if ant is not None:
+                if ant.is_container is False and ant not in self.doubled:
+                    ant.damage *= 2
+                    self.doubled.add(ant)
+                elif ant.is_container is True:
+                    if ant not in self.doubled:
+                        ant.damage *= 2
+                        self.doubled.add(ant)
+                    if ant.ant_contained is not None and ant.ant_contained not in self.doubled:
+                        ant.ant_contained.damage *= 2
+                        self.doubled.add(ant.ant_contained)
+            exit = exit.exit
         # END Problem 12
-
+#    16 test cases passed! No cases failed.
     def reduce_health(self, amount):
         """Reduce health by AMOUNT, and if the QueenAnt has no health
         remaining, signal the end of the game.
         """
         # BEGIN Problem 12
         "*** YOUR CODE HERE ***"
+        super().reduce_health(amount)
+        if self.health <= 0:
+            ants_lose()
+
         # END Problem 12
 
 
@@ -451,7 +540,11 @@ class Bee(Insect):
 
     name = 'Bee'
     damage = 1
+
     # OVERRIDE CLASS ATTRIBUTES HERE
+    def __init__(self, health, place=None):
+        super().__init__(health, place)
+        self.is_waterproof = True
 
     def sting(self, ant):
         """Attack an ANT, reducing its health by 1."""
@@ -466,7 +559,8 @@ class Bee(Insect):
         """Return True if this Bee cannot advance to the next Place."""
         # Special handling for NinjaAnt
         # BEGIN Problem Optional 1
-        return self.place.ant is not None
+        ant = self.place.ant
+        return ant is not None and ant.blocks_path
         # END Problem Optional 1
 
     def action(self, gamestate):
@@ -519,16 +613,21 @@ class NinjaAnt(Ant):
     name = 'Ninja'
     damage = 1
     food_cost = 5
+    blocks_path = False
     # OVERRIDE CLASS ATTRIBUTES HERE
     # BEGIN Problem Optional 1
-    implemented = False   # Change to True to view in the GUI
+    implemented = True   # Change to True to view in the GUI
     # END Problem Optional 1
-
+    
     def action(self, gamestate):
         # BEGIN Problem Optional 1
         "*** YOUR CODE HERE ***"
+        place = self.place
+        bees = place.bees[:]
+        for bee in bees:
+            bee.reduce_health(self.damage)
         # END Problem Optional 1
-
+#    15 test cases passed! No cases failed.
 ############
 # Statuses #
 ############
