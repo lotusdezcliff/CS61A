@@ -20,7 +20,7 @@ This repository contains personal notes, assignments, solutions, and study guide
 
 ## 🔗 Reference
 
-Official course site: [CS 61A at UC Berkeley](https://cs61a.org)
+Official course site: [CS 61A at UC Berkeley](https://cs61a.vercel.app)
 
 ## ⚠️ Disclaimer
 
