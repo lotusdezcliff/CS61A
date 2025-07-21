@@ -72,3 +72,50 @@ def max_path_sum(t):
           return t.label
     else:
          return max(max_path_sum(b) for b in t.branches) + t.label
+    
+# Q4: Find Path
+'''
+Write a function that takes in a tree and a value x and returns a list containing the nodes along the path required to get from the root of the tree to a node containing x.
+
+If x is not present in the tree, return None. Assume that the entries of the tree are unique.
+
+For the following tree, find_path(t, 5) should return [2, 7, 6, 5]
+'''
+def find_path(t, x):
+    """
+    >>> t = Tree(2, [Tree(7, [Tree(3), Tree(6, [Tree(5), Tree(11)])]), Tree(15)])
+    >>> find_path(t, 5)
+    [2, 7, 6, 5]
+    >>> find_path(t, 10)  # returns None
+    """
+    if _____________________________:
+        return _____________________________
+    _____________________________:
+        path = ______________________
+        if _____________________________:
+            return _____________________________
+
+# Q5: Prune Small
+# Complete the function prune_small that takes in a Tree t and a number n and prunes t mutatively. If t or any of its branches has more than n branches, the n branches with the smallest labels should be kept and any other branches should be pruned, or removed, from the tree.
+def prune_small(t, n):
+    """Prune the tree mutatively, keeping only the n branches
+    of each node with the smallest label.
+
+    >>> t1 = Tree(6)
+    >>> prune_small(t1, 2)
+    >>> t1
+    Tree(6)
+    >>> t2 = Tree(6, [Tree(3), Tree(4)])
+    >>> prune_small(t2, 1)
+    >>> t2
+    Tree(6, [Tree(3)])
+    >>> t3 = Tree(6, [Tree(1), Tree(3, [Tree(1), Tree(2), Tree(3)]), Tree(5, [Tree(3), Tree(4)])])
+    >>> prune_small(t3, 2)
+    >>> t3
+    Tree(6, [Tree(1), Tree(3, [Tree(1), Tree(2)])])
+    """
+    while ___________________________:
+        largest = max(_______________, key=____________________)
+        _________________________
+    for __ in _____________:
+        ___________________
