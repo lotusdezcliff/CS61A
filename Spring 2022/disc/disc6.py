@@ -39,3 +39,23 @@ oneone
 2
 'ab'
 '''
+
+# Q2: Height
+# Write a function that returns the height of a tree. Recall that the height of a tree is the length of the longest path from the root to a leaf.
+def height(t):
+    """Return the height of a tree.
+
+    >>> t = Tree(3, [Tree(5, [Tree(1)]), Tree(2)])
+    >>> height(t)
+    2
+    >>> t = Tree(3, [Tree(1), Tree(2, [Tree(5, [Tree(6)]), Tree(1)])])
+    >>> height(t)
+    3
+    """
+    "*** YOUR CODE HERE ***"
+    if not t.branches:
+         return 1
+    else:
+         return (max(height(b) for b in t.branches)) + 1
+
+
