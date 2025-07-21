@@ -58,4 +58,17 @@ def height(t):
     else:
          return (max(height(b) for b in t.branches)) + 1
 
+# Q3: Maximum Path Sum
+# Write a function that takes in a tree and returns the maximum sum of the values along any path in the tree. Recall that a path is from the tree's root to any leaf.
+def max_path_sum(t):
+    """Return the maximum path sum of the tree.
 
+    >>> t = Tree(1, [Tree(5, [Tree(1), Tree(3)]), Tree(10)])
+    >>> max_path_sum(t)
+    11
+    """
+    "*** YOUR CODE HERE ***"
+    if not t.branches:
+          return t.label
+    else:
+         return max(max_path_sum(b) for b in t.branches) + t.label
