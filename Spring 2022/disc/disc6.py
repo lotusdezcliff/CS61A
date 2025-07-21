@@ -24,15 +24,18 @@ class B:
          for a in self.a:
              ret += str(a)
          return ret
-
+'''
 >>> A('one')
-
+'one'
 >>> print(A('one'))
-
+oneone
 >>> repr(A('two'))
-
+'two'
 >>> b = B()
-
+'boo!'
 >>> b.add_a(A('a'))
 >>> b.add_a(A('b'))
 >>> b
+2
+'ab'
+'''
