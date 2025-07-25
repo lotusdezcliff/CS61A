@@ -118,8 +118,8 @@ def prune_small(t, n):
     >>> t3
     Tree(6, [Tree(1), Tree(3, [Tree(1), Tree(2)])])
     """
-    while ___________________________:
-        largest = max(_______________, key=____________________)
+    while len(t.branches) >= n:
+        largest = max(t.branches)
         _________________________
     for __ in _____________:
         ___________________
