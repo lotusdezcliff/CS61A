@@ -88,12 +88,16 @@ def find_path(t, x):
     [2, 7, 6, 5]
     >>> find_path(t, 10)  # returns None
     """
-    if _____________________________:
-        return _____________________________
-    _____________________________:
-        path = ______________________
-        if _____________________________:
-            return _____________________________
+    if t.label == x:
+        return [t.label]
+    for b in t.branches:
+          subpath = find_path(b, x)
+          if subpath is not None:
+               return [t.label] + subpath
+     
+    return None
+
+          
 
 # Q5: Prune Small
 # Complete the function prune_small that takes in a Tree t and a number n and prunes t mutatively. If t or any of its branches has more than n branches, the n branches with the smallest labels should be kept and any other branches should be pruned, or removed, from the tree.
