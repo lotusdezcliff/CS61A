@@ -13,6 +13,14 @@ def chain(t):
     False
     """
     "*** YOUR CODE HERE ***"
+    # if the next label is the same, keep going. If not, go for next branch. If all the way down still same, check is_leaf = True.
+    for b in t.branches:
+        if b.label == t.label:
+            if b.is_leaf:
+                return True
+            if chain(b):
+                return True
+    return False
 
 
 class Tree:
