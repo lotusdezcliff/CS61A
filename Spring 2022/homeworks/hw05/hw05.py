@@ -82,6 +82,18 @@ def duplicate_link(lnk, val):
     Link(2, Link(4, Link(6, Link(8))))
     """
     "*** YOUR CODE HERE ***"
+    # Empty case
+    if not lnk:
+        return lnk
+
+    if lnk.first == val:
+        lnk.rest = Link(val, lnk.rest)
+    else:
+        if lnk.rest != None:
+            duplicate_link(lnk.rest, val)
+#    1 test cases passed! No cases failed.            
+    
+
 
 
 def deep_map_mut(fn, lnk):
@@ -102,6 +114,7 @@ def deep_map_mut(fn, lnk):
     <9 <16> 25 36>
     """
     "*** YOUR CODE HERE ***"
+    
 
 
 class Tree:
