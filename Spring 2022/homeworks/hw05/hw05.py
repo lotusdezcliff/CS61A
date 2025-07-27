@@ -114,8 +114,14 @@ def deep_map_mut(fn, lnk):
     <9 <16> 25 36>
     """
     "*** YOUR CODE HERE ***"
-    
-
+    if lnk is Link.empty:
+        return
+    if isinstance(lnk.first, Link):
+        deep_map_mut(fn, lnk.first)
+    else:
+        lnk.first = fn(lnk.first)
+    deep_map_mut(fn, lnk.rest)
+#     1 test cases passed! No cases failed.
 
 class Tree:
     """
