@@ -15,6 +15,21 @@ def reverse_link(lnk):
     Link(3, Link(5, Link(7, Link(9))))
     """
     "*** YOUR CODE HERE ***"
+# go all the way to the very bottom of the list, then hit the base case go back, while go back put all the node back to a new linked list.
+    def append_to_end(lnk, val):
+        if lnk.rest is Link.empty:
+            lnk.rest = Link(val)
+        else:
+            append_to_end(lnk.rest, val)
+        return lnk
+
+    if lnk is Link.empty:
+        return Link.empty
+    if lnk.rest is Link.empty:
+        return Link(lnk.first)
+    else:
+        return append_to_end(reverse_link(lnk.rest), lnk.first)
+
 
 
 class Link:
