@@ -56,7 +56,11 @@ def cumulative_mul(t):
     Tree(5040, [Tree(60, [Tree(3), Tree(4), Tree(5)]), Tree(42, [Tree(7)])])
     """
     "*** YOUR CODE HERE ***"
-
+    for b in t.branches:
+        cumulative_mul(b)
+        t.label *= b.label
+#     1 test cases passed! No cases failed.            
+        
 
 def has_cycle(link):
     """Return whether link contains a cycle.
