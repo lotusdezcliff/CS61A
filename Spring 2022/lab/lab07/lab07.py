@@ -77,8 +77,25 @@ def has_cycle(link):
     False
     """
     "*** YOUR CODE HERE ***"
+    """limit = 255
+    for i in range(limit):
+        if link.rest is Link.empty:
+            return False
+        else:
+            link = link.rest
+    return True"""
 
+    slow = link
+    fast = link
 
+    while fast is not Link.empty and fast.rest is not Link.empty:
+        slow = slow.rest           
+        fast = fast.rest.rest      
+
+        if slow is fast:           
+            return True
+    return False
+#     1 test cases passed! No cases failed.
 def has_cycle_constant(link):
     """Return whether link contains a cycle.
 
@@ -91,7 +108,25 @@ def has_cycle_constant(link):
     False
     """
     "*** YOUR CODE HERE ***"
+    """limit = 255
+    for i in range(limit):
+        if link.rest is Link.empty:
+            return False
+        else:
+            link = link.rest
+    return True"""
 
+    slow = link
+    fast = link
+
+    while fast is not Link.empty and fast.rest is not Link.empty:
+        slow = slow.rest           
+        fast = fast.rest.rest      
+
+        if slow is fast:           
+            return True
+    return False
+#     1 test cases passed! No cases failed.
 
 class Link:
     """A linked list.
