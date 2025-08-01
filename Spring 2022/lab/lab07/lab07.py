@@ -16,6 +16,31 @@ def store_digits(n):
     """
     "*** YOUR CODE HERE ***"
 
+    def num_len(n):
+        count = 0
+        if n == 0:
+            return 1
+        while n >= 1:
+            n //= 10
+            count += 1
+        return count
+
+    lnk = Link(n // pow(10, num_len(n) - 1))
+
+    def append_to_end(lnk, val):
+        if lnk.rest is Link.empty:
+            lnk.rest = Link(val)
+        else:
+            append_to_end(lnk.rest, val)
+        return lnk
+    
+    for i in range(num_len(n) - 2, -1, -1):
+        digit = (n // pow(10, i)) % 10
+        append_to_end(lnk, digit)
+        n -= digit * pow(10, i)
+    
+    return lnk
+#     1 test cases passed! No cases failed.
 
 def cumulative_mul(t):
     """Mutates t so that each node's label becomes the product of all labels in
