@@ -42,9 +42,26 @@ def remove_all(link, value):
     """
     "*** YOUR CODE HERE ***"
     if link.rest is not None:
-        if link.first == value:
+        if link.rest.first == value:
             link.rest = link.rest.rest
             remove_all(link, value)
         else:
             remove_all(link.rest, value)
     
+# Q3: WWPD: Iterators
+'''
+>>> s = [[1, 2, 3, 4]]
+>>> i = iter(s)
+>>> j = iter(next(i))
+>>> next(j)
+1
+>>> s.append(5)
+>>> next(i)
+5
+>>> next(j)
+2
+>>> list(j)
+[3, 4]
+>>> next(i)
+StopIteration
+'''
