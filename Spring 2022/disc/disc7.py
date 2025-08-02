@@ -86,5 +86,23 @@ def filter_iter(iterable, f):
     for i in iterable:
         if f(i):
             yield i
-        else:
-            yield 
+
+# Q5: Infinite Hailstone
+def hailstone(n):
+    """Yields the elements of the hailstone sequence starting at n.
+       At the end of the sequence, yield 1 infinitely.
+
+    >>> hail_gen = hailstone(10)
+    >>> [next(hail_gen) for _ in range(10)]
+    [10, 5, 16, 8, 4, 2, 1, 1, 1, 1]
+    >>> next(hail_gen)
+    1
+    """
+    "*** YOUR CODE HERE ***"
+    while n > 1:
+        yield n
+        n =  (lambda x: x // 2 if x % 2 == 0 else 3 * x + 1)(n)
+    while True:
+        yield 1
+    
+    
