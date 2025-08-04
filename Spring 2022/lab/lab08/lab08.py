@@ -83,20 +83,19 @@ def deep_len(lnk):
     3
     >>> deep_len(Link(Link(1, Link(2)), Link(3, Link(4))))
     4
-    >>> levels = Link(Link(Link(1, Link(2)), 
-            Link(3)), Link(Link(4), Link(5)))
+    >>> levels = Link(Link(Link(1, Link(2)), Link(3)), Link(Link(4), Link(5)))
     >>> print(levels)
     <<<1 2> 3> <4> 5>
     >>> deep_len(levels)
     5
     """
-    if ______________:
+    if lnk is Link.empty:
         return 0
-    elif ______________:
-        return 1
+    elif not isinstance(lnk.first, Link):
+        return 1 + deep_len(lnk.rest)
     else:
-        return _________________________
-
+        return deep_len(lnk.first) + deep_len(lnk.rest)
+#     1 test cases passed! No cases failed.
 
 def add_d_leaves(t, v):
     """Add d leaves containing v to each node at every depth d.
