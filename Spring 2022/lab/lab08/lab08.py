@@ -23,7 +23,19 @@ def repeated(t, k):
     """
     assert k > 1
     "*** YOUR CODE HERE ***"
-
+    count = 1
+    curr = next(t)
+    for val in t:
+        if curr == val:
+            count += 1
+            curr = val
+        else:
+            count = 1
+            curr = val
+        if count == k:
+            return curr
+#    1 test cases passed! No cases failed.
+    
 
 def merge(incr_a, incr_b):
     """Yield the elements of strictly increasing iterables incr_a and incr_b, removing
