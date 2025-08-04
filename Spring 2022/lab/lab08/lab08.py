@@ -57,8 +57,25 @@ def merge(incr_a, incr_b):
     iter_a, iter_b = iter(incr_a), iter(incr_b)
     next_a, next_b = next(iter_a, None), next(iter_b, None)
     "*** YOUR CODE HERE ***"
-
-
+    while next_a is not None and next_b is not None:
+        if next_a > next_b:
+            yield next_b
+            next_b = next(iter_b, None)
+        elif next_a == next_b:
+            yield next_a
+            next_a = next(iter_a, None)
+            next_b = next(iter_b, None)
+        else:
+            yield next_a
+            next_a = next(iter_a, None)
+    while next_a is not None:
+        yield next_a
+        next_a = next(iter_a, None)
+    while next_b is not None:
+        yield next_b
+        next_b = next(iter_b, None)
+#    1 test cases passed! No cases failed.
+        
 def deep_len(lnk):
     """ Returns the deep length of a possibly deep linked list.
 
