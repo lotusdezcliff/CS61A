@@ -168,7 +168,10 @@ def insert_into_all(item, nested_list):
     [[0], [0, 1, 2], [0, 3]]
     """
     "*** YOUR CODE HERE ***"
-
+    for lst in nested_list:
+        lst.insert(0, item)
+    return nested_list
+#     1 test cases passed! No cases failed.
 
 def subseqs(s):
     """Return a nested list (a list of lists) of all subsequences of S.
