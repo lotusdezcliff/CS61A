@@ -183,10 +183,11 @@ def subseqs(s):
     >>> subseqs([])
     [[]]
     """
-    if not s:
-        return [[]]
+    if ________________:
+        ________________
     else:
-        return list(map(lambda x: list(x), set(map(lambda x: tuple(sorted(set(x))), product(s, repeat=len(s)))))) + [[]]
+        ________________
+        ________________
 
 
 
@@ -343,6 +344,7 @@ def flip_two(s):
 
     # For an extra challenge, try writing out an iterative approach as well below!
     "*** YOUR CODE HERE ***"
+    
 
 
 class Link:
