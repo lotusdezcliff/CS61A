@@ -275,6 +275,10 @@ def pairs(lst):
     5 5
     """
     "*** YOUR CODE HERE ***"
+    for i in lst:
+        for j in lst:
+            yield (i, j)
+#    1 test cases passed! No cases failed.
 
 
 class PairsIterator:
