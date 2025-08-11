@@ -156,8 +156,13 @@ def add_d_leaves(t, v):
         10
     """
     "*** YOUR CODE HERE ***"
-
-
+    def depth(t, d):
+        for b in t.branches:
+            depth(b, d + 1)
+        for i in range(d):
+            t.branches.append(Tree(v))
+    depth(t, 0)
+#    1 test cases passed! No cases failed.
 def insert_into_all(item, nested_list):
     """Return a new list consisting of all the lists in nested_list,
     but with item added to the front of each. You can assume that
