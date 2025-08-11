@@ -188,11 +188,12 @@ def subseqs(s):
     >>> subseqs([])
     [[]]
     """
-    if ________________:
-        ________________
+    if s == []:
+        return [s]
     else:
-        ________________
-        ________________
+        rest_subseqs = subseqs(s[1:])
+        return rest_subseqs + [[s[0]] + seq for seq in rest_subseqs]
+#     1 test cases passed! No cases failed.
 
 
 
