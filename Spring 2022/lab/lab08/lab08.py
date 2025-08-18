@@ -379,9 +379,13 @@ def flip_two(s):
     Link(2, Link(1, Link(4, Link(3, Link(5)))))
     """
     "*** YOUR CODE HERE ***"
-
-    # For an extra challenge, try writing out an iterative approach as well below!
-    "*** YOUR CODE HERE ***"
+    # swap (s.first, s.rest.first) (s.rest.rest.first, s.rest.rest.rest.first) until (s.xxx, Link.empty)
+    # 1->2->3->4->5, 2->1->4->3->5
+    if s is Link.empty or s.rest is Link.empty:   
+        return 
+    s.first, s.rest.first = s.rest.first, s.first
+    flip_two(s.rest.rest)
+#    1 test cases passed! No cases failed.
     
 
 
