@@ -299,13 +299,26 @@ class PairsIterator:
 
     def __init__(self, lst):
         "*** YOUR CODE HERE ***"
-
+        self.lengths = len(lst)
+        self.count_x = 0
+        self.count_y = 0
+        self.lst = lst
     def __next__(self):
         "*** YOUR CODE HERE ***"
-
+        if self.count_x >= self.lengths:
+            raise StopIteration
+        else:
+            self.pair = (self.lst[self.count_x], self.lst[self.count_y])
+            self.count_y += 1
+            if self.count_y >= self.lengths:
+                self.count_x += 1
+                self.count_y = 0
+        return self.pair
+        
     def __iter__(self):
         "*** YOUR CODE HERE ***"
-
+        return self
+#     1 test cases passed! No cases failed.
 
 def long_paths(tree, n):
     """Return a list of all paths in tree with length at least n.
