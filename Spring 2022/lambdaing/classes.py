@@ -48,7 +48,9 @@ class Card:
         """
         # BEGIN Problem 1
         "*** YOUR CODE HERE ***"
+        return (self.attack - opponent_card.defense)
         # END Problem 1
+#    1 test cases passed! No cases failed.
 
     def effect(self, opponent_card, player, opponent):
         """
@@ -88,6 +90,7 @@ class Player:
         self.name = name
         # BEGIN Problem 2
         "*** YOUR CODE HERE ***"
+
         # END Problem 2
 
     def draw(self):
