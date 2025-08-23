@@ -90,9 +90,12 @@ class Player:
         self.name = name
         # BEGIN Problem 2
         "*** YOUR CODE HERE ***"
-
+        init_draw = 5
+        self.hand = []
+        for i in range(init_draw):
+            self.hand.append(self.deck.cards.pop())
         # END Problem 2
-
+#    1 test cases passed! No cases failed.
     def draw(self):
         """Draw a card from the player's deck and add it to their hand.
         >>> test_card = Card('test', 100, 100)
@@ -107,6 +110,8 @@ class Player:
         assert not self.deck.is_empty(), 'Deck is empty!'
         # BEGIN Problem 2
         "*** YOUR CODE HERE ***"
+        card = self.deck.cards.pop(0)
+        self.hand.append(card)
         # END Problem 2
 
     def play(self, index):
@@ -125,6 +130,8 @@ class Player:
         """
         # BEGIN Problem 2
         "*** YOUR CODE HERE ***"
+        card = self.hand.pop(index)
+        return card
         # END Problem 2
 
     def display_hand(self):
