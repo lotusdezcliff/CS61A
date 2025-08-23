@@ -25,8 +25,11 @@ class Card:
         """
         # BEGIN Problem 1
         "*** YOUR CODE HERE ***"
+        self.name = name
+        self.attack = attack
+        self.defense = defense
         # END Problem 1
-
+#    1 test cases passed! No cases failed.
     def power(self, opponent_card):
         """
         Calculate power as:
