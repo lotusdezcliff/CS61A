@@ -113,7 +113,7 @@ class Player:
         card = self.deck.cards.pop(0)
         self.hand.append(card)
         # END Problem 2
-
+#   1 test cases passed! No cases failed.
     def play(self, index):
         """Remove and return a card from the player's hand at the given INDEX.
         >>> from cards import *
@@ -133,7 +133,7 @@ class Player:
         card = self.hand.pop(index)
         return card
         # END Problem 2
-
+#   1 test cases passed! No cases failed.
     def display_hand(self):
         """
         Display the player's current hand to the user.
@@ -149,7 +149,7 @@ class Player:
         """
         return self.play(random.randrange(len(self.hand)))
 
-
+#    5 test cases passed! No cases failed.
 class AICard(Card):
     cardtype = 'AI'
 
