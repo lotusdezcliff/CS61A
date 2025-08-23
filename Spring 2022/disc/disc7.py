@@ -134,6 +134,3 @@ def primes_gen(n):
     if is_prime(n):
         yield n
     yield from primes_gen(n - 1)
-
-
-    
